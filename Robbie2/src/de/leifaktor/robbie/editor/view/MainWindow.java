@@ -276,6 +276,10 @@ public class MainWindow extends JFrame {
         floorView.repaint();
         this.roomViewOpened = false;
     }
+    
+    public void showTileSetWindow() {
+        new TileSetWindow(model, imageLoader);
+    }
 
     public void setRoom(Floor floor, int x, int y) {
         roomView.setRoom(floor, x, y);
@@ -299,8 +303,7 @@ public class MainWindow extends JFrame {
             imageLoader = new ImageLoader(episode);
             floorView.setFloor(model.getEpisode().getFloors().get(0));
             tilePanel.repaint();
-            openFloorView();
-            new TileSetWindow(model, imageLoader);
+            openFloorView();            
         }        
     }
     

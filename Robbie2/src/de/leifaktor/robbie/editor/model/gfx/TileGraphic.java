@@ -26,6 +26,10 @@ public class TileGraphic {
     
     public int getY() {
         return y;
-    }   
+    }
+    
+    public String toString() {
+        return "TileGraphic@" + Integer.toHexString(hashCode()) + "[tileset=" + tileset + " x=" + x + " y=" + y + "]";
+    }
  
 }

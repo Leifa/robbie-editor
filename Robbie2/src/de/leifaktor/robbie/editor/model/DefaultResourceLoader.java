@@ -13,6 +13,7 @@ public class DefaultResourceLoader {
     public static List<TileSet> createDefaultTileSet() {
         List<TileSet> tileSets = new ArrayList<TileSet>();
         tileSets.add(new TileSet("tileset.png", 16));
+        tileSets.add(new TileSet("disks.png", 16));
         return tileSets;
     }
     

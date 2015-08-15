@@ -45,6 +45,8 @@ public class ToolBarButton extends JButton {
                 mainWindow.loadPressed();
             } else if (e.getActionCommand().equals("new")) {
                 mainWindow.newEpisodePressed();
+            } else if (e.getActionCommand().equals("tileset")) {
+                mainWindow.showTileSetWindow();
             } else if (e.getActionCommand().equals("play")) {
                 mainWindow.playPressed();
             } 

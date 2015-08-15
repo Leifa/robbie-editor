@@ -48,6 +48,13 @@ public class MyToolBar extends JToolBar {
         // SEPARATOR
         this.add(new JSeparator(SwingConstants.VERTICAL));
 
+        // TILESET-WINDOW
+        button = new ToolBarButton("play.png", "tileset", "TileSet", "TileSet", mainWindow);
+        this.add(button);
+        
+     // SEPARATOR
+        this.add(new JSeparator(SwingConstants.VERTICAL));
+
         // PLAY
         button = new ToolBarButton("play.png", "play", "Play", "Play", mainWindow);
         this.add(button);

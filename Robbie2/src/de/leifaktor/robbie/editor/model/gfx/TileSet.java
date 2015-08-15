@@ -94,5 +94,15 @@ public class TileSet {
     public void setFilename(String filename) {
         this.filename = filename;
     }
+
+    public void setTileSize(int newTileSize) {
+        this.tileSize = newTileSize;        
+    }
+    
+    public String toString() {
+        return "TileSet@" + Integer.toHexString(hashCode()) + "[filename=" + filename + " tileSize=" + tileSize + "]";
+    }
+
+
 }
 

@@ -30,8 +30,7 @@ public class ImageLoader {
     
     public ImageLoader(Episode episode) {
         this.episode = episode;
-        initTileSetImages();
-        initTileGraphics();
+        update();
     }
     
     /**
@@ -54,18 +53,20 @@ public class ImageLoader {
             String filename = tileSet.getFilename();
             BufferedImage image = loadImage("res/tileset/" + filename);
             tileSetImageMap.put(tileSet, image);
-
         }
     }
     
     /**
      * Loads the images for all tile graphics in the episode.
+     * TODO: Doesn't work when called the second time!? UnmodifiableMap??
      */
     
     private void initTileGraphics() {
+        System.out.println("imageLoader : initTileGraphics()");
         this.tileGraphicImageMap = new HashMap<TileGraphic, BufferedImage>();
-        Iterator it = episode.getTileGraphics().entrySet().iterator();
-        while (it.hasNext()) {            
+        Iterator<?> it = episode.getTileGraphics().entrySet().iterator();
+        System.out.println("size " + episode.getTileGraphics().size());
+        while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             TileGraphic tileGraphic = (TileGraphic) pair.getValue();
             TileSet tileSet = tileGraphic.getTileSet();
@@ -109,9 +110,24 @@ public class ImageLoader {
         }
         return pic;
     }
+    
+    /**
+     * Returns the whole image of a tileset.
+     * @param tileSet
+     * @return
+     */
 
     public BufferedImage getTileSetImage(TileSet tileSet) {
         return tileSetImageMap.get(tileSet);
+    }
+    
+    /**
+     * Updates all image maps
+     */
+
+    public void update() {
+        initTileSetImages();
+        initTileGraphics();        
     }   
 
 }

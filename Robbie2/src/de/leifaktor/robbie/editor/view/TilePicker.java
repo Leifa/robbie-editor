@@ -53,6 +53,8 @@ public class TilePicker extends JPanel {
         int x = 0;
         int y = 0;
         for (Tile tile: mainWindow.getModel().getEpisode().getTiles()) {
+            System.out.println("tilePicker : tile " + x);
+            System.out.println(tile.getDefaultTileGraphic());
             BufferedImage image = imageLoader.getTileImage(tile);
             g.drawImage(image, x*tileWidth, y*tileHeight, tileWidth, tileHeight, null);
             x++;
