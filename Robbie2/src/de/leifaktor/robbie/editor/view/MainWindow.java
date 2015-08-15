@@ -18,14 +18,16 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import de.leifaktor.robbie.editor.model.Episode;
 import de.leifaktor.robbie.editor.model.Floor;
 import de.leifaktor.robbie.editor.model.Model;
 import de.leifaktor.robbie.editor.model.Room;
+import de.leifaktor.robbie.editor.model.RoomFactory;
 import de.leifaktor.robbie.editor.model.RoomLayer;
+import de.leifaktor.robbie.editor.view.tilesetviewer.TileSetWindow;
 
 /**
- * The MainWindow is the main class of the view and the controller, so it is the VC part of the MVC
- * pattern.
+ * The MainWindow is the main class of the view
  * 
  * It extends JFrame and knows about all its sub components. All subcomponents know the main window
  * so they can call the controlling methods by themselves.
@@ -38,6 +40,12 @@ public class MainWindow extends JFrame {
      */
 
     private Model model;
+    
+    /**
+     * A reference to the image loader.
+     */
+    
+    private ImageLoader imageLoader;
 
     /**
      * The toolbar
@@ -143,6 +151,7 @@ public class MainWindow extends JFrame {
 
         // TABBEDPANE FOR TILE PICKER AND ENTITY PICKER
         JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setFocusable(false);
         //ImageIcon icon = createImageIcon("images/middle.gif");
         tabbedPane.addTab("Tiles", null, sp, "Does nothing");
         tabbedPane.addTab("Entities", null, sp2, "Does nothing");
@@ -150,14 +159,17 @@ public class MainWindow extends JFrame {
 
         // PROPERTY-TABLE
         propertyTable = new JTable();
+        propertyTable.setFocusable(false);
         propertyTable.setBackground(Color.RED);
         addComponentToFrame(propertyTable, 0, 2);
 
         // ROOMVIEW
         roomView = new RoomView(this);
+        roomView.setFocusable(true);
 
         // ROOMVIEW
         floorView = new FloorView(this);
+        floorView.setFocusable(true);
 
         // CARDPANEL FOR ROOMVIEW AND FLOORVIEW
         cards = new JPanel(new CardLayout(10,10));
@@ -176,7 +188,7 @@ public class MainWindow extends JFrame {
         statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
         statusPanel.add(statusLabel);
         addComponentToFrame(statusPanel, 0, 3, 2, 1);
-
+        
         this.repaint();
     }
 
@@ -201,7 +213,8 @@ public class MainWindow extends JFrame {
      * @param gridHeight number of cells that should be taken in the y direction
      */
 
-    private void addComponentToFrame(Component component, int gridx, int gridy, int gridWidth, int gridHeight) {
+    private void addComponentToFrame(Component component, int gridx, int gridy, int gridWidth,
+            int gridHeight) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(1, 1, 1, 1);
         gbc.fill = GridBagConstraints.BOTH;
@@ -251,6 +264,7 @@ public class MainWindow extends JFrame {
     public void openRoomView() {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "ROOMVIEW");
+        roomView.requestFocus();
         roomView.repaint();
         this.roomViewOpened = true;
     }
@@ -258,12 +272,13 @@ public class MainWindow extends JFrame {
     public void openFloorView() {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, "FLOORVIEW");
+        floorView.requestFocus();
         floorView.repaint();
         this.roomViewOpened = false;
     }
 
-    public void setRoom(Room r) {
-        roomView.setRoom(r);
+    public void setRoom(Floor floor, int x, int y) {
+        roomView.setRoom(floor, x, y);
     }
     
     public Model getModel() {
@@ -271,13 +286,22 @@ public class MainWindow extends JFrame {
     }
     
     public void showNewEpisodeDialog() {
-        EpisodeDialog episodeDialog = new EpisodeDialog();      
+        // Start the episode dialog
+        EpisodeDialog episodeDialog = new EpisodeDialog();
         episodeDialog.setLocationRelativeTo(this);
         episodeDialog.setModal(true);
         episodeDialog.setVisible(true);
-        model.setEpisode(episodeDialog.getEpisode());
-        floorView.setFloor(model.getEpisode().getFloors().get(0));
-        openFloorView();        
+        
+        // If the episode is not null, put it in the model
+        Episode episode = episodeDialog.getEpisode();
+        if (episode != null) {
+            model.setEpisode(episode);
+            imageLoader = new ImageLoader(episode);
+            floorView.setFloor(model.getEpisode().getFloors().get(0));
+            tilePanel.repaint();
+            openFloorView();
+            new TileSetWindow(model, imageLoader);
+        }        
     }
     
     /**
@@ -288,7 +312,6 @@ public class MainWindow extends JFrame {
      */
     
     public void fieldClicked(RoomLayer roomLayer, int x, int y) {
-        System.out.println(x + " " + y);
         roomLayer.setTile(x, y, tilePanel.getSelectedTile());
         roomView.repaint();
     }
@@ -303,13 +326,24 @@ public class MainWindow extends JFrame {
     public void selectRoom(Floor currentFloor, int x, int y) {
         Room selectedRoom = currentFloor.getRoom(x,y);
         if (selectedRoom == null) {
-            System.out.println(model.getEpisode().getRoomHeight());
-            selectedRoom = new Room(model.getEpisode().getRoomWidth(),model.getEpisode().getRoomHeight());
+            selectedRoom = RoomFactory.createRoomWithOneLayer(
+                    model.getEpisode().getRoomWidth(),
+                    model.getEpisode().getRoomHeight(),
+                    model.getEpisode().getTiles().get(0));
             currentFloor.setRoom(x, y, selectedRoom);
         }
-        roomView.setRoom(currentFloor.getRoom(x,y));
+        roomView.setRoom(currentFloor, x, y);
 
         openRoomView();
+    }
+    
+    /**
+     * Returns the imageLoader.
+     * @return
+     */
+    
+    public ImageLoader getImageLoader() {
+        return imageLoader;
     }
 
 }

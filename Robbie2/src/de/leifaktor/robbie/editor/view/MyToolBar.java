@@ -1,5 +1,6 @@
 package de.leifaktor.robbie.editor.view;
 
+import javax.swing.JComponent;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -12,6 +13,7 @@ public class MyToolBar extends JToolBar {
         this.mainWindow = mainWindow;
         this.setFloatable(false);
         addToolBarButtons();
+        this.setFocusable(false);
     }
 
     private void addToolBarButtons() {

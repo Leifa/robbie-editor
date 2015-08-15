@@ -14,6 +14,7 @@ public class ToolBarButton extends JButton {
     public ToolBarButton(String imageName, String actionCommand, String toolTipText, String altText,
             MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        this.setFocusable(false);
         // Look for the image.
         String imgLocation = "res/editor/" + imageName;
 

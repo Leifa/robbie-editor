@@ -34,7 +34,6 @@ public class Room {
 		this.width = width;
 		this.height = height;
 		layers = new ArrayList<RoomLayer>();
-		layers.add(new RoomLayer(width,height));
 	}
 	
 	/**
@@ -76,6 +75,10 @@ public class Room {
 	public List<RoomLayer> getLayers() {
 		return layers;
 	}
+
+    public void addLayer(RoomLayer layer) {
+        layers.add(layer);        
+    }
 	
 	
 

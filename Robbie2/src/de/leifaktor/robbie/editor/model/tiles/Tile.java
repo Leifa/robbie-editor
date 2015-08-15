@@ -15,6 +15,10 @@ public abstract class Tile {
 
     private TileGraphic defaultTileGraphic;
     
+    public Tile(TileGraphic defaultTileGraphic) {
+        this.defaultTileGraphic = defaultTileGraphic;
+    };
+    
     public void setDefaultTileGraphic(TileGraphic defaultTileGraphic) {
         this.defaultTileGraphic = defaultTileGraphic;
     }

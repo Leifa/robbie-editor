@@ -1,11 +1,14 @@
 package de.leifaktor.robbie.editor.model.tiles;
 
-import de.leifaktor.robbie.editor.model.gfx.Graphics;
+import de.leifaktor.robbie.editor.model.gfx.TileGraphic;
 
 public class Wall extends Tile {
-    
-    public Wall() {
-        this.setDefaultTileGraphic(Graphics.WALL);
+
+    public Wall(TileGraphic defaultTileGraphic) {
+        super(defaultTileGraphic);
     }
+    
+
+
     
 }

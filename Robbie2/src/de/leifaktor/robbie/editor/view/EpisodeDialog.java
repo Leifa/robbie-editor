@@ -13,6 +13,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import de.leifaktor.robbie.editor.model.EmptyEpisodeFactory;
 import de.leifaktor.robbie.editor.model.Episode;
 
 public class EpisodeDialog extends JDialog {
@@ -59,13 +60,11 @@ public class EpisodeDialog extends JDialog {
 
         JButton cancel = new JButton("Cancel");
         cancel.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 dispose();              
             }
-
         });
         panel.add(cancel);
 
@@ -73,14 +72,13 @@ public class EpisodeDialog extends JDialog {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                int width = ((Integer)widthSpinner.getValue()).intValue();
-                int height = ((Integer)heightSpinner.getValue()).intValue();
-                episode = new Episode(width, height);
+                int roomWidth = ((Integer)widthSpinner.getValue()).intValue();
+                int roomHeight = ((Integer)heightSpinner.getValue()).intValue();
+                episode = EmptyEpisodeFactory.createEmptyEpisode(roomWidth, roomHeight);
                 episode.setTitle(title.getText());
                 setVisible(false);
                 dispose();              
             }
-
         });
         panel.add(ok);
 

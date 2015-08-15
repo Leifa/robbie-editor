@@ -1,11 +1,11 @@
 package de.leifaktor.robbie.editor.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import de.leifaktor.robbie.editor.model.tiles.EmptyTile;
+import de.leifaktor.robbie.editor.model.gfx.TileGraphic;
+import de.leifaktor.robbie.editor.model.gfx.TileSet;
 import de.leifaktor.robbie.editor.model.tiles.Tile;
-import de.leifaktor.robbie.editor.model.tiles.Wall;
 
 
 public class Episode {
@@ -35,6 +35,18 @@ public class Episode {
 	private List<Tile> tiles;
 	
 	/**
+	 * A list of all tileSets
+	 */
+	
+	private List<TileSet> tileSets;
+	
+	/**
+	 * A map of all tileGraphics. The first component is a unique String for every tileGraphic.
+	 */
+	
+	private Map<String, TileGraphic> tileGraphics;
+
+    /**
 	 * The list of floors
 	 */
 	
@@ -48,12 +60,11 @@ public class Episode {
 	public Episode(int roomWidth, int roomHeight) {
 		this.roomHeight = roomHeight;
 		this.roomWidth = roomWidth;
-		this.floors = new ArrayList<Floor>();
-		this.floors.add(new Floor(1,1));
-		this.tiles = new ArrayList<Tile>();
-		tiles.add(new EmptyTile());
-		tiles.add(new Wall());
 	}
+	
+	/////////////////////////////////////////////////////////
+	// GETTERS AND SETTERS
+	/////////////////////////////////////////////////////////
 	
 	/**
 	 * Returns the name of the episode
@@ -102,5 +113,41 @@ public class Episode {
 	public List<Tile> getTiles() {
 	    return tiles;
 	}
+	
+	/**
+	 * Sets the list of tiles
+	 * @param createDefaultTileList
+	 */
+
+    public void setTiles(List<Tile> tiles) {
+        this.tiles = tiles;
+    }
+    
+    /**
+     * Sets the list of floors
+     * @param floors
+     */
+
+    public void setFloors(List<Floor> floors) {
+        this.floors = floors;        
+    }
+    
+    public List<TileSet> getTileSets() {
+        return tileSets;
+    }
+
+    public void setTileSets(List<TileSet> tileSets) {
+        this.tileSets = tileSets;
+    }
+
+    public Map<String, TileGraphic> getTileGraphics() {
+        return tileGraphics;
+    }
+
+    public void setTileGraphics(Map<String, TileGraphic> tileGraphics) {
+        this.tileGraphics = tileGraphics;
+    }
+    
+    
 	
 }

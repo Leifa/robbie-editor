@@ -127,7 +127,8 @@ public class Floor {
 	 */
 
     public Room getRoom(int x, int y) {
-        return this.rooms[x+y*getWidth()];
+        if (x < 0 || x >= width || y < 0 || y >= height) return null;
+        return rooms[x+y*getWidth()];
     }
 	
 }

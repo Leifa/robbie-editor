@@ -26,15 +26,6 @@ public class TileGraphic {
     
     public int getY() {
         return y;
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    
-    public BufferedImage getImage() {
-        return tileset.getTileImage(x, y);
-    }
-    
+    }   
+ 
 }

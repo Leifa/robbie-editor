@@ -7,11 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import de.leifaktor.robbie.editor.model.Floor;
+import de.leifaktor.robbie.editor.model.Room;
 
 public class FloorView extends JPanel {
 
@@ -44,10 +46,17 @@ public class FloorView extends JPanel {
      */
 
     private int scale = 5;
+    
+    /**
+     * @param mainWindow
+     */
+    
+    private ThumbnailCreator thumbnailCreator;
 
 
     public FloorView(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        this.thumbnailCreator = new ThumbnailCreator(mainWindow);
         this.addMouseListener(new MyMouseListener());
     }
 
@@ -61,7 +70,7 @@ public class FloorView extends JPanel {
         this.roomWidth = mainWindow.getModel().getEpisode().getRoomWidth();
         this.roomHeight = mainWindow.getModel().getEpisode().getRoomHeight();
         repaint();
-        
+
     }
 
     /**
@@ -80,10 +89,23 @@ public class FloorView extends JPanel {
             g.setColor(Color.BLACK);
             for (int i = 0; i < floorWidth; i++) {
                 for (int j = 0; j < floorHeight; j++) {
-                    g.drawRect(EXPAND_FLOOR_WIDTH+i*roomWidth*scale,
-                            EXPAND_FLOOR_WIDTH+j*roomHeight*scale,
-                            roomWidth*scale,
-                            roomHeight*scale);
+                    Room room = currentFloor.getRoom(i, j);
+
+                    if (room != null) {
+                        BufferedImage thumb = thumbnailCreator.makeRoomThumbnail(room, 3);
+                        g.drawImage(thumb,
+                                EXPAND_FLOOR_WIDTH+i*roomWidth*scale,
+                                EXPAND_FLOOR_WIDTH+j*roomHeight*scale,
+                                roomWidth*scale,
+                                roomHeight*scale,
+                                null);
+                    } else {
+                        g.setColor(Color.GRAY);
+                        g.fillRect(EXPAND_FLOOR_WIDTH+i*roomWidth*scale,
+                                EXPAND_FLOOR_WIDTH+j*roomHeight*scale,
+                                roomWidth*scale,
+                                roomHeight*scale);
+                    }
                 }
             }
 
@@ -109,7 +131,7 @@ public class FloorView extends JPanel {
 
         }
     }
-    
+
     public class MyMouseListener implements MouseListener {
 
         @Override
@@ -132,24 +154,24 @@ public class FloorView extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent arg0) {
-            
+
         }
 
         @Override
         public void mouseExited(MouseEvent arg0) {
-            
+
         }
 
         @Override
         public void mousePressed(MouseEvent arg0) {
-            
+
         }
 
         @Override
         public void mouseReleased(MouseEvent arg0) {
-            
+
         }
-        
+
     }
 
 }

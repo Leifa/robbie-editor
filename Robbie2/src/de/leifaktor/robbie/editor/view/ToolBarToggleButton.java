@@ -14,6 +14,7 @@ public class ToolBarToggleButton extends JToggleButton {
     public ToolBarToggleButton(String imageName, String imageSecondImageName, String actionCommand,
             String toolTipText, String altText, MainWindow mainWindow) {
         this.mainWindow = mainWindow;
+        this.setFocusable(false);
         //Look for the images.
         String imgLocation = "res/editor/" + imageName;
         String imgLocation2 = "res/editor/" + imageSecondImageName;

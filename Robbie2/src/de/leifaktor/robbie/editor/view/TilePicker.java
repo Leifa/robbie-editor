@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -12,6 +13,8 @@ import de.leifaktor.robbie.editor.model.tiles.Tile;
 public class TilePicker extends JPanel {
 
     private MainWindow mainWindow;
+    
+    private ImageLoader imageLoader;
 
     private int selX;
     private int selY;
@@ -31,6 +34,8 @@ public class TilePicker extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        this.imageLoader = mainWindow.getImageLoader();
+        
         if (mainWindow.getModel().getEpisode() == null) return;
 
         // RECHTECKE
@@ -48,8 +53,8 @@ public class TilePicker extends JPanel {
         int x = 0;
         int y = 0;
         for (Tile tile: mainWindow.getModel().getEpisode().getTiles()) {
-            g.drawImage(tile.getDefaultTileGraphic().getImage(), x*tileWidth, y*tileHeight,
-                    tileWidth, tileHeight, null);
+            BufferedImage image = imageLoader.getTileImage(tile);
+            g.drawImage(image, x*tileWidth, y*tileHeight, tileWidth, tileHeight, null);
             x++;
             if (x > 6) {
                 x = 0;
