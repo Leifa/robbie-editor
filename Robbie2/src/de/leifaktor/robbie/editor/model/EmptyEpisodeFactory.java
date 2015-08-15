@@ -10,6 +10,13 @@ import de.leifaktor.robbie.editor.model.tiles.EmptyTile;
 import de.leifaktor.robbie.editor.model.tiles.Tile;
 import de.leifaktor.robbie.editor.model.tiles.Wall;
 
+/**
+ * This class provides a static method to create an empty episode with one floor, one room, one
+ * room layer and some default resources.
+ * @author leif
+ *
+ */
+
 public class EmptyEpisodeFactory {
     
     public static Episode createEmptyEpisode(int roomWidth, int roomHeight) {
@@ -47,9 +54,7 @@ public class EmptyEpisodeFactory {
         floors.add(floor);
         
         // Create an episode with this one floor
-        episode.setFloors(floors);
-        
-        
+        episode.setFloors(floors);        
         
         // Return the episode
         return episode;        

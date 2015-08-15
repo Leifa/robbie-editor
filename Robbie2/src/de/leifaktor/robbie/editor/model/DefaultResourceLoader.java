@@ -8,6 +8,14 @@ import java.util.Map;
 import de.leifaktor.robbie.editor.model.gfx.TileGraphic;
 import de.leifaktor.robbie.editor.model.gfx.TileSet;
 
+/**
+ * This class provides static methods to create default content into an episode (graphics, tiles,
+ * items, sounds...)
+ * It will later be replaced by the possibility to load an episode from a file.
+ * @author leif
+ *
+ */
+
 public class DefaultResourceLoader {
     
     public static List<TileSet> createDefaultTileSet() {

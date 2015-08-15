@@ -7,11 +7,16 @@ import de.leifaktor.robbie.editor.model.gfx.TileGraphic;
 import de.leifaktor.robbie.editor.model.gfx.TileSet;
 import de.leifaktor.robbie.editor.model.tiles.Tile;
 
+/**
+ * This class represents an episode.
+ * @author leif
+ *
+ */
 
 public class Episode {
 	
 	/**
-	 * The room height
+	 * The room height.
 	 */
 
 	private int roomHeight;
@@ -63,90 +68,26 @@ public class Episode {
 	}
 	
 	/////////////////////////////////////////////////////////
-	// GETTERS AND SETTERS
+	// GETTERS
 	/////////////////////////////////////////////////////////
 	
-	/**
-	 * Returns the name of the episode
-	 */
+	public String                   getTitle()        {return title;}
+	public int                      getRoomHeight()   {return roomHeight;}
+    public int                      getRoomWidth()    {return roomWidth;}
+    public List<Floor>              getFloors()       {return floors;}
+    public List<Tile>               getTiles()        {return tiles;}
+    public List<TileSet>            getTileSets()     {return tileSets;}
+    public Map<String, TileGraphic> getTileGraphics() {return tileGraphics;}
 	
-	public String getTitle() {
-		return title;
-	}
+    /////////////////////////////////////////////////////////
+    // SETTERS
+    /////////////////////////////////////////////////////////
 	
-	/**
-	 * Sets the name of the episode
-	 */
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	/**
-	 * Returns the room height
-	 */
-	
-	public int getRoomHeight() {
-		return roomHeight;
-	}
-	
-	/**
-	 * Returns the room width
-	 */
-	
-	public int getRoomWidth() {
-		return roomWidth;
-	}
-	
-	/**
-	 * Returns the floors
-	 */
-	
-	public List<Floor> getFloors() {
-		return floors;
-	}
-	
-	/**
-	 * Returns the list of tiles
-	 */
-	
-	public List<Tile> getTiles() {
-	    return tiles;
-	}
-	
-	/**
-	 * Sets the list of tiles
-	 * @param createDefaultTileList
-	 */
-
-    public void setTiles(List<Tile> tiles) {
-        this.tiles = tiles;
-    }
-    
-    /**
-     * Sets the list of floors
-     * @param floors
-     */
-
-    public void setFloors(List<Floor> floors) {
-        this.floors = floors;        
-    }
-    
-    public List<TileSet> getTileSets() {
-        return tileSets;
-    }
-
-    public void setTileSets(List<TileSet> tileSets) {
-        this.tileSets = tileSets;
-    }
-
-    public Map<String, TileGraphic> getTileGraphics() {
-        return tileGraphics;
-    }
-
-    public void setTileGraphics(Map<String, TileGraphic> tileGraphics) {
-        this.tileGraphics = tileGraphics;
-    }
+	public void setTitle(String title)                                 {this.title = title;}
+    public void setFloors(List<Floor> floors)                          {this.floors = floors;}
+    public void setTiles(List<Tile> tiles)                             {this.tiles = tiles;}
+    public void setTileSets(List<TileSet> tileSets)                    {this.tileSets = tileSets;}
+    public void setTileGraphics(Map<String, TileGraphic> tileGraphics) {this.tileGraphics = tileGraphics;}
     
     
 	

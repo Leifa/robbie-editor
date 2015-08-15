@@ -54,7 +54,7 @@ public class Animation {
         PINGPONG,
         
         /**
-         * The animation plays once, then stays in the last frame.
+         * The animation plays once and disappears after the last frame.
          */
         
         ONCE;

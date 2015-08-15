@@ -13,7 +13,7 @@ import de.leifaktor.robbie.editor.view.MainWindow;
 public class EditorLauncher {
 
     /**
-     * A reference to the main window.
+     * A reference to the main window. It is the View of the MVC.
      */
 
     private MainWindow window;

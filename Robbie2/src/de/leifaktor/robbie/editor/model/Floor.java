@@ -93,15 +93,6 @@ public class Floor {
 	}
 	
 	/**
-	 * Returns the array of Rooms.
-	 * @return the array of Rooms.
-	 */
-	
-	public Room[] getRooms() {
-		return rooms;
-	}
-	
-	/**
 	 * Returns the width of the floor.
 	 * @return the width of the floor.
 	 */

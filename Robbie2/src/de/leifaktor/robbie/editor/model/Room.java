@@ -20,6 +20,7 @@ public class Room {
 	
 	/**
 	 * The RoomLayers
+	 * TODO: Ordering?
 	 */
 	
 	private List<RoomLayer> layers;
@@ -30,55 +31,30 @@ public class Room {
 	
 	private String name;
 	
+	/**
+	 * Creates a new Room with the specified width and height.
+	 * @param width
+	 * @param height
+	 */
+	
 	public Room(int width, int height) {
 		this.width = width;
 		this.height = height;
-		layers = new ArrayList<RoomLayer>();
 	}
 	
-	/**
-	 * Adds a new layer on top.
-	 */
+	//////////////////////////////////////////
+	// GETTERS
+	//////////////////////////////////////////
 	
-	public void addLayer() {
-		layers.add(new RoomLayer(width, height));
-	}
+	public int getWidth() {return this.width;}
+	public int getHeight() {return this.height;}
+	public List<RoomLayer> getLayers() {return layers;}
 	
-	/**
-	 * Removes the specified layer from this room
-	 */
-	
-	public void removeLayer(RoomLayer l) {
-		layers.remove(l);
-	}
-	
-	/**
-	 * Returns the width of the room
-	 */
-	
-	public int getWidth() {
-		return this.width;
-	}
-	
-	/**
-	 * Returns the height of the room
-	 */
-	
-	public int getHeight() {
-	    return this.height;
-	}
-	
-	/**
-	 * Returns the layers of the room
-	 */
-	
-	public List<RoomLayer> getLayers() {
-		return layers;
-	}
+	//////////////////////////////////////////
+    // SETTERS
+    //////////////////////////////////////////
 
-    public void addLayer(RoomLayer layer) {
-        layers.add(layer);        
-    }
+    public void setLayers(List<RoomLayer> layers) {this.layers = layers;} 
 	
 	
 

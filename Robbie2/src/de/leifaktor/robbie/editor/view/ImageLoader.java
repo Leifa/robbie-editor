@@ -58,14 +58,11 @@ public class ImageLoader {
     
     /**
      * Loads the images for all tile graphics in the episode.
-     * TODO: Doesn't work when called the second time!? UnmodifiableMap??
      */
     
     private void initTileGraphics() {
-        System.out.println("imageLoader : initTileGraphics()");
         this.tileGraphicImageMap = new HashMap<TileGraphic, BufferedImage>();
         Iterator<?> it = episode.getTileGraphics().entrySet().iterator();
-        System.out.println("size " + episode.getTileGraphics().size());
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             TileGraphic tileGraphic = (TileGraphic) pair.getValue();

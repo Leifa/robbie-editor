@@ -40,7 +40,6 @@ public class RoomLayer {
 		tiles = new Tile[roomWidth*roomHeight];
 		this.roomWidth = roomWidth;
 		this.roomHeight = roomHeight;
-		entities = new LinkedList<Entity>();
 	}
 	
 	/**
@@ -48,15 +47,27 @@ public class RoomLayer {
 	 */
 	
 	public Tile getTile(int x, int y) {
-		return tiles[roomWidth*y+x];
+	    if (isValid(x,y)) return tiles[roomWidth*y+x];
+	    else return null;
 	}
 	
 	/**
 	 * Sets a tile.
 	 */
 	
-	public void setTile(int x, int y, Tile t) {
-	    tiles[roomWidth*y + x] = t;
+	public void setTile(int x, int y, Tile tile) {
+	    if (isValid(x,y)) tiles[roomWidth*y + x] = tile;
+	}
+	
+	/**
+	 * Returns true iff the coordinates describe a position in the room.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	
+	private boolean isValid(int x, int y) {
+	    return (x >= 0 && x < roomWidth && y >= 0 && y < roomHeight);
 	}
 	
 }
