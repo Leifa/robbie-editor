@@ -74,7 +74,10 @@ public class ImageLoader {
             int y = tileGraphic.getY();            
             BufferedImage tileImage = getTileImage(tileSet, x, y);
             tileGraphicImageMap.put(tileGraphic, tileImage);
-            it.remove(); // avoids a ConcurrentModificationException
+            /** On the internet they said this line avoids a ConcurrentModificationException
+             *  But it makes the Map empty and it cannot be used the next time?!
+             */             
+            //it.remove(); 
         } 
     }
     
